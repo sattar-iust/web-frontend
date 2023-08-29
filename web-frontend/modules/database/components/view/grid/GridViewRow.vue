@@ -188,6 +188,9 @@ export default {
   },
   data() {
     return {
+      fields: this.fields,
+      row: this.row,
+
       // The state can be used by functional components to make changes to the dom.
       // This is for example used by the functional file field component to enable the
       // drop effect without having the cell selected.

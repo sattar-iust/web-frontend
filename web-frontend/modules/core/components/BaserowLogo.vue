@@ -1,13 +1,13 @@
 <template>
   <a
-    href="https://baserow.io"
+    href="https://constructor.university/"
     target="_blank"
-    title="Baserow - open source no-code database tool and Airtable alternative"
+    title="Constructor University Bremen"
   >
     <img
       height="14"
       src="@baserow/modules/core/static/img/logo.svg"
-      alt="Baserow - open source no-code database tool and Airtable alternative"
+      alt="Constructor University Bremen"
     />
   </a>
 </template>

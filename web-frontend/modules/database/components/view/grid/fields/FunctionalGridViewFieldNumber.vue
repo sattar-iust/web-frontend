@@ -9,7 +9,16 @@
     }"
   >
     <div class="grid-field-number">
-      {{ props.value !== 'NaN' ? props.value : 'Invalid Number' }}
+      {{
+        props.value && props.value !== 'NaN' && props.field.name.includes('€')
+          ? (+props.value).toLocaleString(undefined, {
+              style: 'currency',
+              currency: 'EUR',
+            })
+          : props.value !== 'NaN'
+          ? props.value
+          : 'Invalid Number'
+      }}
     </div>
   </div>
 </template>

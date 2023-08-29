@@ -1,7 +1,7 @@
 <template>
   <div class="layout__col-2-scroll layout__col-2-scroll--white-background">
     <div class="dashboard">
-      <DashboardHelp></DashboardHelp>
+      <!-- <DashboardHelp></DashboardHelp> -->
       <WorkspaceInvitation
         v-for="invitation in workspaceInvitations"
         :key="'invitation-' + invitation.id"

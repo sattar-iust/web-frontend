@@ -1,15 +1,5 @@
 <template>
   <div>
-    <div v-if="view.filters.length === 0">
-      <div class="filters__none">
-        <div class="filters__none-title">
-          {{ $t('viewFilterContext.noFilterTitle') }}
-        </div>
-        <div class="filters__none-description">
-          {{ $t('viewFilterContext.noFilterText') }}
-        </div>
-      </div>
-    </div>
     <ViewFieldConditionsForm
       :filters="view.filters"
       :disable-filter="disableFilter"
@@ -18,23 +8,9 @@
       :view="view"
       :read-only="readOnly"
       class="filters__items"
-      @deleteFilter="deleteFilter($event)"
       @updateFilter="updateFilter($event)"
       @selectOperator="updateView(view, { filter_type: $event })"
     />
-    <div v-if="!disableFilter" class="filters_footer">
-      <a class="filters__add" @click.prevent="addFilter()">
-        <i class="fas fa-plus"></i>
-        {{ $t('viewFilterContext.addFilter') }}</a
-      >
-      <div v-if="view.filters.length > 0">
-        <SwitchInput
-          :value="view.filters_disabled"
-          @input="updateView(view, { filters_disabled: $event })"
-          >{{ $t('viewFilterContext.disableAllFilters') }}</SwitchInput
-        >
-      </div>
-    </div>
   </div>
 </template>
 
@@ -71,6 +47,18 @@ export default {
       return this.$registry.getAll('viewFilter')
     },
   },
+
+  mounted() {
+    if (this.view.filters.length > 1) {
+      this.view.filters.slice(1).forEach((filter) => {
+        this.deleteFilter(filter)
+      })
+    }
+    if (this.view.filters.length === 0) {
+      this.addFilter()
+    }
+  },
+
   methods: {
     async addFilter(values) {
       try {

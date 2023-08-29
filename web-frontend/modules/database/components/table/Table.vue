@@ -19,7 +19,7 @@
               views !== null &&
                 $refs.viewsContext.toggle(
                   $refs.viewsSelectToggle,
-                  'bottom',
+                  'top',
                   'left',
                   4
                 )
@@ -57,12 +57,7 @@
           <a
             class="header__filter-link"
             @click="
-              $refs.viewContext.toggle(
-                $event.currentTarget,
-                'bottom',
-                'left',
-                4
-              )
+              $refs.viewContext.toggle($event.currentTarget, 'top', 'left', 4)
             "
           >
             <i class="header__filter-icon fas fa-ellipsis-h"></i>
@@ -76,7 +71,7 @@
           >
           </ViewContext>
         </li>
-        <li
+        <!--        <li
           v-if="
             hasSelectedView &&
             view._.type.canFilter &&
@@ -96,7 +91,8 @@
             :disable-filter="disableFilter"
             @changed="refresh()"
           ></ViewFilter>
-        </li>
+        </li> -->
+
         <li
           v-if="
             hasSelectedView &&
@@ -155,6 +151,17 @@
             @changed="refresh()"
           ></ViewDecoratorMenu>
         </li>
+        <li class="header__filter-item">
+          <ViewFilterForm
+            ref="viewFilterForm"
+            :fields="fields"
+            :view="view"
+            :read-only="readOnly"
+            :disable-filter="disableFilter"
+            class="align-center"
+            @changed="refresh()"
+          ></ViewFilterForm>
+        </li>
       </ul>
       <component
         :is="getViewHeaderComponent(view)"
@@ -211,6 +218,7 @@ import ViewSearch from '@baserow/modules/database/components/view/ViewSearch'
 import EditableViewName from '@baserow/modules/database/components/view/EditableViewName'
 import ShareViewLink from '@baserow/modules/database/components/view/ShareViewLink'
 import BaserowLogo from '@baserow/modules/core/components/BaserowLogo'
+import ViewFilterForm from '@baserow/modules/database/components/view/ViewFilterForm.vue'
 
 /**
  * This page component is the skeleton for a table. Depending on the selected view it
@@ -227,6 +235,7 @@ export default {
     ViewSort,
     ViewSearch,
     ViewContext,
+    ViewFilterForm,
   },
   /**
    * Because there is no hook that is called before the route changes, we need the

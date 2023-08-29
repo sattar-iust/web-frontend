@@ -11,39 +11,12 @@
         'filters__item--loading': filter._ && filter._.loading,
       }"
     >
-      <a
-        v-if="!disableFilter"
-        class="filters__remove"
-        @click="deleteFilter($event, filter)"
-      >
-        <i class="fas fa-times"></i>
-      </a>
-      <span v-else class="filters__remove"></span>
+      <div>
+        <span> </span>
+      </div>
+
       <div class="filters__operator">
         <span v-if="index === 0">{{ $t('viewFilterContext.where') }}</span>
-        <Dropdown
-          v-if="index === 1 && !disableFilter"
-          :value="filterType"
-          :show-search="false"
-          class="dropdown--floating dropdown--tiny"
-          @input="selectBooleanOperator($event)"
-        >
-          <DropdownItem
-            :name="$t('viewFilterContext.and')"
-            value="AND"
-          ></DropdownItem>
-          <DropdownItem
-            :name="$t('viewFilterContext.or')"
-            value="OR"
-          ></DropdownItem>
-        </Dropdown>
-        <span v-if="index > 1 || (index > 0 && disableFilter)">
-          {{
-            filterType === 'AND'
-              ? $t('viewFilterContext.and')
-              : $t('viewFilterContext.or')
-          }}
-        </span>
       </div>
       <div class="filters__field">
         <Dropdown

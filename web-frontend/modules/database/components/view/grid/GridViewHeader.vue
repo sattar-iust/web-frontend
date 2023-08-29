@@ -9,13 +9,27 @@
         :store-prefix="storePrefix"
       ></GridViewHide>
     </li>
+
+    <!-- Add the ViewFilterForm component here -->
+    <!-- <li class="header__filter-item">
+      <ViewFilterForm
+        ref="viewFilterForm"
+        :fields="fields"
+        :view="view"
+        :read-only="readOnly"
+        :disable-filter="disableFilter"
+        @refresh="$emit('refresh', $event)"
+      ></ViewFilterForm>
+    </li> -->
+
     <li class="header__filter-item header__filter-item--right">
       <ViewSearch
         :view="view"
         :fields="fields"
         :store-prefix="storePrefix"
         @refresh="$emit('refresh', $event)"
-      ></ViewSearch>
+      >
+      </ViewSearch>
     </li>
   </ul>
 </template>
@@ -26,9 +40,11 @@ import { mapState } from 'vuex'
 import GridViewHide from '@baserow/modules/database/components/view/grid/GridViewHide'
 import ViewSearch from '@baserow/modules/database/components/view/ViewSearch'
 
+import ViewFilterForm from '@baserow/modules/database/components/view/ViewFilterForm'
+
 export default {
   name: 'GridViewHeader',
-  components: { GridViewHide, ViewSearch },
+  components: { GridViewHide, ViewSearch, ViewFilterForm },
   props: {
     database: {
       type: Object,
@@ -59,5 +75,12 @@ export default {
       return this.fields.filter((field) => !field.primary)
     },
   },
+
+  //  mounted() {
+  //    this.$nextTick(() => {
+  //      // Call the addFilter method after the entire page has loaded
+  //      this.$refs.viewFilterForm.addFilter()
+  //    })
+  //  },
 }
 </script>
